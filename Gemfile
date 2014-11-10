@@ -83,7 +83,7 @@ group :test do
   gem 'shoulda-matchers'
 
   gem 'capybara'
-  gem 'selenium-webdriver'
+  gem 'capybara-webkit'
   gem "factory_girl_rails"
   gem 'database_cleaner'
   gem "email_spec"
