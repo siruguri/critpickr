@@ -59,6 +59,7 @@ The code attempts to be secure - it passes all Brakeman tests, as of Apr 2014. P
         heroku config:add RAILS_SECRET_TOKEN=a-128-character-token-no-spaces-though-you-generated-as-a-secret
 	
   * In development, the secret token is enabled in `config/initializers/secret_token.rb`. The app also uses the `dotenv-rails` gem to utilize a .env file in the app root as an alternate method if you don't even want to share your development secret token in your repo. You have to create the `.env` file and add the `RAILS_SECRET_TOKEN` variable to it, if you are using this method.
+* **However**, the app does **NOT** use the database as the session store. This is the recommended thing to do, but has some performance implications, so [look into implementing it yourself](https://github.com/rails/activerecord-session_store).
 
 ## Testing
 

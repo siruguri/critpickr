@@ -13,3 +13,4 @@ sed "s/TestDk/$NEWNAME/g" config/initializers/secret_token.rb > _tmp; mv _tmp co
 sed "s/TestDk/$NEWNAME/g" config/initializers/session_store.rb > _tmp; mv _tmp config/initializers/session_store.rb 
 sed "s/TestDk/$NEWNAME/g" config/routes.rb > _tmp; mv _tmp config/routes.rb 
 sed "s/TestDk/$NEWNAME/g" Rakefile > _tmp; mv _tmp Rakefile 
+sed "s/_test_dk/$NEWNAME/g" config/initializers/session_store.rb > _tmp; mv _tmp config/initializers/session_store.rb
