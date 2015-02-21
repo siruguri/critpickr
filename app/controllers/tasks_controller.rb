@@ -1,11 +1,13 @@
 class TasksController < ApplicationController
+  # controller for actions related to tasks
+
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
   def index
-    # @tasks automatically set to Product.accessible_by(current_ability)
+    # @tasks automatically set by Cancan gem.
     respond_to do |format|
-      format.html #index.html.erb
+      format.html # index.html.haml
       format.json { render json: @tasks }
     end
   end

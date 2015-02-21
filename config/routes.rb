@@ -1,6 +1,6 @@
 require 'resque_web'
 
-TestDk::Application.routes.draw do
+TodoList::Application.routes.draw do
 
   # I like having this to populate the navbar with, via the database rather than do it in the views.
   resources :navbar_entries
@@ -11,16 +11,16 @@ TestDk::Application.routes.draw do
 
   root to: 'tasks#index' # Change this to something else in your app.
 
-  # The rest of the routes file is probably useless to most new apps based on this template, EXCEPT for the 
-  # 404 catchall below which has to always be at the end.
+  # The rest of the routes file is specific to this app and you will have to manipulate it for your app. The 
+  # 404 catchall route below always has to be at the end, if you intend to use it as designed in this app.
 
   # Adds RailsAdmin
   mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
 
-  resources :locations
   resources :tasks
   resources :categories
-  
+
+  # Web interface for Resque tasks
   ResqueWeb::Engine.eager_load!
   mount ResqueWeb::Engine => "/resque"
 
@@ -39,5 +39,4 @@ TestDk::Application.routes.draw do
 
   # Need a catch all to redirect to the errors controller, for catching 404s as an exception
   match "*path", to: "errors#catch_404", via: [:get, :post]
-
 end
