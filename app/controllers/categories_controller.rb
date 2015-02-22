@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
-  def new
-    @categories=Category.all
-    sa
+  load_and_authorize_resource
+  
+  def index
   end
 end

@@ -19,7 +19,7 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+    # TODO
   end
 
   def update
@@ -49,9 +49,10 @@ class TasksController < ApplicationController
 
     # If the task exists (in case this is an update), and it can be updated... 
     respond_to do |format|
-      db_transaction_result = yield
+      # The block should return Boolean
+      db_transaction_success? = yield
 
-      if db_transaction_result
+      if db_transaction_success?
         format.html { redirect_to @task, notice: "#{options[:success_message]}: task" }
         format.json { render json: @task, status: options[:success_http_status] }
       else

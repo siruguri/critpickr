@@ -13,30 +13,21 @@
 
 ActiveRecord::Schema.define(version: 20150209223602) do
 
-  create_table "categories", force: true do |t|
+  create_table "categories", force: :cascade do |t|
     t.string   "name"
+    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "locations", force: true do |t|
-    t.float    "lat"
-    t.float    "long"
-    t.string   "name"
-    t.string   "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "owner_id"
-  end
-
-  create_table "navbar_entries", force: true do |t|
+  create_table "navbar_entries", force: :cascade do |t|
     t.string   "title"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "oauth_access_grants", force: true do |t|
+  create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
     t.integer  "application_id",    null: false
     t.string   "token",             null: false
@@ -49,7 +40,7 @@ ActiveRecord::Schema.define(version: 20150209223602) do
 
   add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true
 
-  create_table "oauth_access_tokens", force: true do |t|
+  create_table "oauth_access_tokens", force: :cascade do |t|
     t.integer  "resource_owner_id"
     t.integer  "application_id"
     t.string   "token",             null: false
@@ -64,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150209223602) do
   add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id"
   add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true
 
-  create_table "oauth_applications", force: true do |t|
+  create_table "oauth_applications", force: :cascade do |t|
     t.string   "name",         null: false
     t.string   "uid",          null: false
     t.string   "secret",       null: false
@@ -75,14 +66,14 @@ ActiveRecord::Schema.define(version: 20150209223602) do
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
 
-  create_table "task_categorizations", force: true do |t|
+  create_table "task_categorizations", force: :cascade do |t|
     t.integer  "task_id"
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tasks", force: true do |t|
+  create_table "tasks", force: :cascade do |t|
     t.string   "title"
     t.integer  "owner_id"
     t.datetime "created_at"
@@ -90,12 +81,7 @@ ActiveRecord::Schema.define(version: 20150209223602) do
     t.date     "due_date"
   end
 
-  create_table "test_models", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -111,6 +97,7 @@ ActiveRecord::Schema.define(version: 20150209223602) do
     t.boolean  "admin"
     t.integer  "age"
     t.string   "confirmation_token"
+    t.string   "unconfirmed_email"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
   end
