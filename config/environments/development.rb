@@ -1,4 +1,3 @@
-# Needed for proper Cap deploy with env vars
 require 'dotenv'
 Dotenv.load
 
