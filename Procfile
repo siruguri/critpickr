@@ -1,3 +1,3 @@
-web: bundle exec rails server  -p $PORT thin 
-resque: bundle exec rake resque:work
-
+web: bin/rails s
+redis: redis-server
+worker: bundle exec sidekiq -q scrapers

@@ -41,7 +41,7 @@ class TasksController < ApplicationController
   end
 
   private
-  def complete_update options_in
+  def complete_update(options_in)
     options={success_http_status: :created, error_http_status: :unprocessable_entity, success_message: "Success!"}
     options=options.merge options_in
 
@@ -50,9 +50,9 @@ class TasksController < ApplicationController
     # If the task exists (in case this is an update), and it can be updated... 
     respond_to do |format|
       # The block should return Boolean
-      db_transaction_success? = yield
+      db_transaction_success = yield
 
-      if db_transaction_success?
+      if db_transaction_success
         format.html { redirect_to @task, notice: "#{options[:success_message]}: task" }
         format.json { render json: @task, status: options[:success_http_status] }
       else
