@@ -14,15 +14,17 @@ TodoList::Application.routes.draw do
   # The rest of the routes file is specific to this app and you will have to manipulate it for your app. The 
   # 404 catchall route below always has to be at the end, if you intend to use it as designed in this app.
 
+  # Admin - these routes sould ideally be protected with a constraint
+  require 'sidekiq/web'
+  # authenticate :admin, lambda { |u| u.is_a? Admin } do
+  mount Sidekiq::Web => '/sidekiq_ui'
   # Adds RailsAdmin
   mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
 
+  #end
+
   resources :tasks
   resources :categories
-
-  # Web interface for Resque tasks
-  ResqueWeb::Engine.eager_load!
-  mount ResqueWeb::Engine => "/resque"
 
   # Added API and Doorkeeper
   constraints(format: /json/) do
