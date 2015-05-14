@@ -40,11 +40,15 @@ Before you run your app, you have to prepare the baseline code as follows:
         git rm category.rb location.rb task*
         cd ../../app/controllers
         git rm locations_controller.rb tasks_controller.rb categories_controller.rb
+	git rm -r api
         cd ../app/views/
-        git rm -r locations/ tasks/	
+        git rm -r locations/ tasks/ categories/
 	cd ../db/migrate
-	git rm *task* *location* *categor*
-        cd ../../
+	git rm *task* *categor* *doork*
+        cd ../../test/
+	git rm controllers/*
+	git rm integrations/*
+	git rm fixtures/categories.yml fixtures/tasks.yml
 
 ## Security
 
@@ -117,12 +121,6 @@ These generate files, so you don't have to re-run them, but they are here for th
     # CanCan
     rails g cancan:ability
 
-    # For rspec tests folders
-    rails generate rspec:install
-
-    # For formtastic
-    rails generate formtastic:install
-
     # For Bootstrap Rails
     rails generate bootstrap:install less
 
@@ -134,3 +132,11 @@ These generate files, so you don't have to re-run them, but they are here for th
 ## Addenda
 
 * Upgrade to Formtastic Bootstrap 3 requires [custom change to Formtastic Bootstrap code](https://github.com/mjbellantoni/formtastic-bootstrap/issues/108)
+
+## Contribute and Use
+
+Forking this skeleton to build your own app? Please give credit as follows:
+
+This app is based on [the skeleton Rails 4 app](https://github.com/siruguri/baseline_rails_install) written by [@siruguri](https://github.com/siruguri/)
+
+Adding to the repository? Your pull requests are most welcome!
