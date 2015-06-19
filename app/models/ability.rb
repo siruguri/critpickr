@@ -13,9 +13,10 @@ class Ability
       if user.admin?
         can :manage, :all
       else
-        # Do not use :all where possible. Security best practice
+        # Do not use :all where possible - security best practice.
         # can :create, :all
-
+        
+        can :create, [Task]
         can :edit, [Task, Category], :owner_id => user.id
         can :read, [Task, Category], :owner_id => user.id
         can :update, [Task, Category], :owner_id => user.id

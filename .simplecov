@@ -7,6 +7,7 @@ unless defined?(Spring)
     add_filter 'bundle'
     add_filter 'bin'
     add_filter 'Rakefile'
+    add_filter 'lib/tasks'
 
     add_group 'API', 'app/api_engine'
 

@@ -16,10 +16,8 @@ This Rails 4.2 app sets up the basic code for a skeleton app:
 * Assets
   * Stylesheets use SASS, rather than LESS. The `application.css.scss` file explicitly includes what it needs, which in the beiginning is simply Bootstrap and a reset file that performs [basic browser resets](http://meyerweb.com/eric/tools/css/reset/)
 * The layout puts notice and alert at the top of the page, and a float:right element to accommodate the user session (logged-in/out) state.
-* Forms use [Formtastic Bootstrap](https://github.com/mjbellantoni/formtastic-bootstrap).
-* The app has Capistrano (3.3.5) installed with some basic defaults that assist in making deployments to a remote folder via SSH, like sym-linking to an existing database, to the database config file so that credentials are not stored in the SCS, etc.
+* The app has Capistrano v3 installed with some basic defaults that assist in making deployments to a remote folder via SSH, like sym-linking to an existing database, to the database config file so that credentials are not stored in the SCS, etc.
 * Rails Admin: The app now has Rails Admin installed. Note that installation was done by following [the basic steps](https://github.com/sferik/rails_admin#installation), and that the Devise lines in `config/initializers/rails_admin.rb` are uncommented. 
-
 ## Usage
 
 Before you run your app, you have to prepare the baseline code as follows:
@@ -49,6 +47,8 @@ Before you run your app, you have to prepare the baseline code as follows:
 	git rm controllers/*
 	git rm integrations/*
 	git rm fixtures/categories.yml fixtures/tasks.yml
+
+* You might also want to delete some of the steps in the `seeds.rb` file - otherwise if you ran a `db:reset` task, those methods will be executed and generate error messages if you don't have the corresponding models.
 
 ## Security
 
@@ -128,10 +128,6 @@ These generate files, so you don't have to re-run them, but they are here for th
     rails g rails_admin:install
 
     # There's probably stuff for geocoding, gmaps4rails, and doorkeeper ... not sure if that's the case.
-
-## Addenda
-
-* Upgrade to Formtastic Bootstrap 3 requires [custom change to Formtastic Bootstrap code](https://github.com/mjbellantoni/formtastic-bootstrap/issues/108)
 
 ## Contribute and Use
 

@@ -44,11 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   def go_back_or_root(message)
-    if request.env.key? "HTTP_REFERER"
-      redirect_to :back, :alert => message
-    else
-      redirect_to root_url, :alert => message
-    end
+    redirect_to root_url, :alert => message
   end 
 
   # Use URL options to set locale. I prefer it that way.

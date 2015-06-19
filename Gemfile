@@ -19,8 +19,9 @@ gem 'uglifier'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails'
 
-# Everybody gotta have some Bootstrap!
+# Everybody gotta have some jQuery (UI) and Bootstrap!
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'bootstrap-sass'
 
 # Needed for default layouts
@@ -36,7 +37,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'devise', git: 'https://github.com/plataformatec/devise.git', :branch => 'lm-rails-4-2'
+gem 'devise'
 gem 'haml-rails'
 gem 'cancan'
 

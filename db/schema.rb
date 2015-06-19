@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209223602) do
+ActiveRecord::Schema.define(version: 20150515051643) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150209223602) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -66,6 +67,19 @@ ActiveRecord::Schema.define(version: 20150209223602) do
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
 
+  create_table "payment_token_records", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "token_processor"
+    t.string  "token_value"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "payment_token_record_id"
+    t.integer  "amount"
+    t.datetime "payment_date"
+    t.string   "payment_for"
+  end
+
   create_table "task_categorizations", force: :cascade do |t|
     t.integer  "task_id"
     t.integer  "category_id"
@@ -100,6 +114,7 @@ ActiveRecord::Schema.define(version: 20150209223602) do
     t.string   "unconfirmed_email"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "phone_number"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -1,5 +1,7 @@
-require File.expand_path('../boot', __FILE__)
+require 'dotenv'
+Dotenv.load
 
+require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -20,26 +22,15 @@ module TodoList
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.active_record.raise_in_transactional_callbacks = true
+    config.active_job.queue_adapter = :sidekiq
+    config.middleware.insert(0, Rack::Deflater)
+    #config.middleware.use Rack::Deflater
 
-    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    config.autoload_paths += %W(#{config.root}/lib)
 
     # rails will fallback to config.i18n.default_locale translation
     config.i18n.fallbacks = true
     I18n.enforce_available_locales = false
-    # rails will fallback to en, no matter what is set as config.i18n.default_locale
-    # config.i18n.fallbacks = [:en]
-    
-    config.generators do |g|
-      g.test_framework :rspec, fixture: true
-      g.fixture_replacement :factory_girl, dir: 'spec/factories'
-      g.view_specs false
-      g.helper_specs false
-      g.stylesheets = false
-      g.javascripts = false
-      g.helper = false
-    end
   end
 end

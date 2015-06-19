@@ -25,3 +25,13 @@ production:
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
+
+# Here's what your Postgres config should look similar to -
+# production:
+# adapter: postgresql
+# encoding: unicode
+# database: tollmaster_prod
+# username: tollmaster_user
+# password: chattycathybaby
+# pool: 5
+# timeout: 5000
