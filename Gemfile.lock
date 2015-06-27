@@ -105,7 +105,7 @@ GEM
     docile (1.1.5)
     doorkeeper (2.2.1)
       railties (>= 3.2)
-    dotenv (2.0.1)
+    dotenv (2.0.2)
     erubis (2.7.0)
     execjs (2.5.2)
     ffi (1.9.8)

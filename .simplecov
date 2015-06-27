@@ -8,7 +8,8 @@ unless defined?(Spring)
     add_filter 'bin'
     add_filter 'Rakefile'
     add_filter 'lib/tasks'
-
+    coverage_dir 'simplecov_coverage'
+    
     add_group 'API', 'app/api_engine'
 
     minimum_coverage 95

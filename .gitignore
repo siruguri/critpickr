@@ -11,7 +11,7 @@ capybara-*.html
 .rspec
 
 /public/system
-/coverage/
+/simplecov_coverage/
 /spec/tmp
 **.orig
 rerun.txt
