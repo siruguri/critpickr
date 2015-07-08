@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   def go_back_or_root(message)
-    redirect_to root_url, :alert => message
+    redirect_to '/404.html', :alert => message
   end 
 
   # Use URL options to set locale. I prefer it that way. Making this a class method because
