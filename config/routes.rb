@@ -1,13 +1,12 @@
-TodoList::Application.routes.draw do
+CritPickr::Application.routes.draw do
 
   # I like having this to populate the navbar with, via the database rather than do it in the views.
   resources :navbar_entries
 
   # Logins and Profiles
   devise_for :users
-  resources :users, path: 'profiles'
-
-  root to: 'homepage#show' # Change this to something else in your app.
+  resources :job_records, only: [:index]
+  resources :scraper_requests, only: [:index, :new, :create]
 
   # The rest of the routes file is specific to this app and you will have to manipulate it for your app. The 
   # 404 catchall route below always has to be at the end, if you intend to use it as designed in this app.

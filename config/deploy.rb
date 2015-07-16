@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-app_name = 'todo_list'
+app_name = 'crit_pickr'
 set :application, app_name
 set :full_app_name, app_name
 set :repo_url, "git@github.com:siruguri/#{app_name}.git"

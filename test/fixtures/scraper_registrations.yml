@@ -1,0 +1,3 @@
+reg_1:
+  db_model: RtMovieEntry
+  scraper_class: AnyScraper

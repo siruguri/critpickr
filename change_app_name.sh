@@ -1,6 +1,6 @@
 # change this to your app's class name and uncomment it - for example:
-# NEWNAME=MyOwnAppName
-# NEWUNDERSCOREDNAME=my_own_app_name
+NEWNAME=CritPickr
+NEWUNDERSCOREDNAME=crit_pickr
 
 sed "s/TodoList/$NEWNAME/g" config/application.rb > _tmp; mv _tmp config/application.rb
 

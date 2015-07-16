@@ -13,8 +13,8 @@
 # Better security - this won't let you use the secret key in production
 
 if Rails.env.production? then
-  raise TodoList::NoTokenException unless ENV['RAILS_SECRET_TOKEN']
-  TodoList::Application.config.secret_key_base = ENV['RAILS_SECRET_TOKEN']
+  raise CritPickr::NoTokenException unless ENV['RAILS_SECRET_TOKEN']
+  CritPickr::Application.config.secret_key_base = ENV['RAILS_SECRET_TOKEN']
 else
-  TodoList::Application.config.secret_key_base = '90f683d8b59aab69a4b274afa8cd730f2d0fe78b2a7f96bedd414689a14dca4bb2d7dcab5463c76bca95c1a87c77fcce05bc9cd8ce3832281f3ca3d8c8ec460e'
+  CritPickr::Application.config.secret_key_base = '90f683d8b59aab69a4b274afa8cd730f2d0fe78b2a7f96bedd414689a14dca4bb2d7dcab5463c76bca95c1a87c77fcce05bc9cd8ce3832281f3ca3d8c8ec460e'
 end

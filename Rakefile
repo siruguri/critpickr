@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-TodoList::Application.load_tasks
+CritPickr::Application.load_tasks

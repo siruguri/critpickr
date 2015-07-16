@@ -10,10 +10,5 @@ class UserSigninIntegrationTest < Capybara::Rails::TestCase
       @user = users(:user_1)
       login_as(@user, :scope => :user)
     end
-
-    it 'can see logout link' do
-      visit '/' # Root path goes to tasks#index
-      page.has_content? 'Sign Out'
-    end
   end  
 end
