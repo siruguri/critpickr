@@ -1,3 +1,14 @@
 reg_1:
   db_model: RtMovieEntry
-  scraper_class: AnyScraper
+  scraper_json: <%= {data: {ratings: [1,2,3]} }.to_json %>
+rt_me_reg:
+  db_model: RtMovieEntry
+  scraper_json: <%= {data: {ratings: [1,2,3]} }.to_json %>
+rt_person_reg:
+  scraper_registration_name: RtPersonPage
+  db_model: ScraperAdaptor
+  scraper_json: '{"data":[{"pattern":".celeb_bio .info_list tr","value":"all_bio"}],"links":[]}'
+rt_me_reg:
+  scraper_registration_name: RtMovieEntry
+  db_model: ScraperAdaptor
+  scraper_json: '{"data":[{"pattern":".movie_title span[itemprop=name]","value":"movie_name"},{"pattern":"#all-critics-numbers span[itemprop=ratingValue]","value":"allcrits_tomato_score"},{"pattern":"#top-critics-numbers span[itemprop=ratingValue]","value":"topcrits_tomato_score"},{"pattern":".quote_bubble","children":[{"pattern":"div[itemprop=reviewRating] span.icon","extraction":[{"function":"attr","args":["title"]},{"function":"attr","args":["class"]}],"value":"rating"},{"pattern":"div[itemprop=author] a","value":"name"}],"value":"critic_data"}],"links":[{"pattern":"table.info a.a","value":"person_list", "scraper_registration_name":"RtPersonPage"}]}'

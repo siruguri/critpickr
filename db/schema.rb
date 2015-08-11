@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702225731) do
+ActiveRecord::Schema.define(version: 20150731205055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,9 +64,10 @@ ActiveRecord::Schema.define(version: 20150702225731) do
 
   create_table "scraper_registrations", force: :cascade do |t|
     t.string   "db_model"
-    t.string   "scraper_class"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "scraper_json"
+    t.string   "scraper_registration_name"
   end
 
   create_table "scraper_requests", force: :cascade do |t|

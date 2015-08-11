@@ -13,7 +13,7 @@ class ScraperRequestsControllerTest < ActionController::TestCase
       post :create, @params
     end
 
-    assert_equal s_reg.scraper_class, enqueued_jobs[0][:args][1]
+    assert_match /RtMovieEntry/, enqueued_jobs[0][:args][1]['_aj_globalid']
     assert_equal init_movie_entries + 1, (s_reg.db_model.constantize).count
 
     assert_redirected_to scraper_requests_path
@@ -27,15 +27,15 @@ class ScraperRequestsControllerTest < ActionController::TestCase
   test 'index' do
     get :index
     assert_template :index
-    assert_select('li', 2)
+    assert_select('li', ScraperRequest.count)
   end
 
   test 'new' do
     get :new
     assert assigns(:scraper_request)
 
-    assert_select('option', 2) do |elts|
-      assert_match /AnyScraper/, elts[1].text
+    assert_select('option', ScraperRegistration.count + 1) do |elts|
+      assert_match /RtMovieEntry/, elts[2].text
     end
   end
 end

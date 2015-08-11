@@ -4,6 +4,6 @@
     = f.text_field :uri, autofocus: true, class: 'form-control'
   .form-element-row
     = f.label :scraper_registration, 'Scraper Model'
-    = f.select :scraper_registration, options_from_collection_for_select(ScraperRegistration.all, 'id', 'scraper_name'), prompt: 'Select a scraper to use'
+    = f.select :scraper_registration, options_from_collection_for_select(ScraperRegistration.all, 'id', 'scraper_registration_name'), prompt: 'Select a scraper to use'
   .form-element-row
     = f.submit 'Scrape!'

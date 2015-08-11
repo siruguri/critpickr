@@ -8,16 +8,19 @@ class ScraperRequestsController < ApplicationController
   def create
     reg = ScraperRegistration.find params[:scraper_request][:scraper_registration].to_i
     if reg
-      s = ScraperRequest.create(uri: params[:scraper_request][:uri], scraper_registration: reg)
+      # Keep a record in the database that we are scraping something so we can avoid running the same scrape twice
+      # Might want to eventually have a forced re-crawl option
+      s = ScraperRequest.find_or_initialize_by(uri: params[:scraper_request][:uri], scraper_registration: reg)
 
-      db_target = (reg.db_model.constantize)
-      db_target.new
-      if db_target.ancestors[0].instance_methods.include?(:original_uri)
-        dbrec = db_target.find_or_create_by(original_uri: s.uri)
-        (reg.scraper_class.constantize).new.scrape_later dbrec
-        flash[:notice] = 'Created request!'
-      else
-        flash[:alert] = 'Target DB model lacks original_uri method!'
+      if !s.persisted?
+        s.save
+        begin
+          SpiderManager::Agent.enqueue_request reg, s.uri
+        rescue SpiderError => e
+          flash[:alert] = 'Target DB model lacks original_uri method!'
+        else
+          flash[:notice] = 'Created request!'
+        end
       end
     end
     redirect_to scraper_requests_path
