@@ -1,3 +1,9 @@
+bad_db_model_name_reg:
+  db_model: NotExistingDbModel
+  scraper_json: <%= {data: {ratings: [1,2,3]} }.to_json %>
+db_model_wo_uri_reg:
+  db_model: DbModelNoUri
+  scraper_json: <%= {data: {ratings: [1,2,3]} }.to_json %>
 reg_1:
   db_model: RtMovieEntry
   scraper_json: <%= {data: {ratings: [1,2,3]} }.to_json %>

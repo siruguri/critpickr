@@ -35,7 +35,7 @@ class ScraperRequestsControllerTest < ActionController::TestCase
     assert assigns(:scraper_request)
 
     assert_select('option', ScraperRegistration.count + 1) do |elts|
-      assert_match /RtMovieEntry/, elts[2].text
+      assert_match /RtMovieEntry/, elts[4].text
     end
   end
 end

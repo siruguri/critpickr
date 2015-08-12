@@ -2,5 +2,10 @@
   Enter a movie name
 
 = form_tag '/movie' do
-  = text_field_tag :q
-  = submit_tag 'Enter'
+  .form-row
+    = text_field_tag :q, '', class: 'form-control'
+  = submit_tag 'Enter', class: 'btn btn-submit'
+
+- if @movie_list_partial
+  .paragraph
+    = render 'movie_list'

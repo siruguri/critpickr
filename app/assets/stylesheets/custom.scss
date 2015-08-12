@@ -23,3 +23,15 @@ body {
 .top {
   margin-top: 20px;
 }
+
+.form-row {
+  margin-bottom: 10px;
+}
+
+.btn-submit {
+  background: lightgreen;
+  &:hover {
+    color: black;
+    background: green;
+  }
+}

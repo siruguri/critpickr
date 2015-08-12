@@ -8,13 +8,21 @@ class MoviesControllerTest < ActionController::TestCase
   test 'routes exist' do
     assert_routing({path: '/movie', method: :post}, {controller: 'movies', action: 'create'})
   end
+  
+  describe 'posting' do
+    before do
+      devise_sign_in users(:user_1)
+    end
 
-  test 'post works without entry' do
-    post :create, {q: ' '}
-    assert_template :new
+    it 'works with and without entry' do
+      post :create, {q: ' '}
+      assert_template :new
 
-    post :create, {q: 'chitty'}
-    assert assigns(:movie_info)
-    assert_template :movie_list
+      post :create, {q: 'man'}
+      assert assigns(:movie_info)
+      assert assigns(:movie_list_partial)
+
+      assert_select 'li', 20
+    end
   end
 end

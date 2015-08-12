@@ -14,7 +14,8 @@ module TmdbApiWrapper
       
       uri = URI(keyed_url("/search/movie") + "&query=#{URI.encode(query.strip)}")
 
-      JSON.parse(Net::HTTP.get uri)
+      str = Net::HTTP.get uri
+      JSON.parse str 
     end
 
     private  

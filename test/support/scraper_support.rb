@@ -1,3 +1,6 @@
+class DbModelNoUri
+end
+
 class DummyDbRecord
   attr_reader :ratings
 

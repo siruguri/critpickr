@@ -1,0 +1,6 @@
+%ol
+  - @movie_info['results'].each do |m|
+    %li
+      %i
+        #{m['original_title']}
+      (#{m['release_date']})
