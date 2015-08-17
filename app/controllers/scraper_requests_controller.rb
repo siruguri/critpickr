@@ -11,16 +11,17 @@ class ScraperRequestsController < ApplicationController
       # Keep a record in the database that we are scraping something so we can avoid running the same scrape twice
       # Might want to eventually have a forced re-crawl option
       s = ScraperRequest.find_or_initialize_by(uri: params[:scraper_request][:uri], scraper_registration: reg)
-
       if !s.persisted?
+        # WIP: It's possible here for the request to make it to the database, but not
+        # trigger the spider manager. That's a bug.
         s.save
-        begin
-          SpiderManager::Agent.enqueue_request reg, s.uri
-        rescue SpiderError => e
-          flash[:alert] = 'Target DB model lacks original_uri method!'
-        else
-          flash[:notice] = 'Created request!'
-        end
+      end
+      begin
+        SpiderManager::Agent.enqueue_request reg, s.uri
+      rescue SpiderException, NameError => e
+        flash[:alert] = "Spidering failed to initialize: #{e.message}"
+      else
+        flash[:notice] = 'Created request!'
       end
     end
     redirect_to scraper_requests_path

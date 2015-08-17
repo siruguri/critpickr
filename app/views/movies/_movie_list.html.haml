@@ -1,6 +1,7 @@
-%ol
-  - @movie_info['results'].each do |m|
+= form_tag '/profile/set_sort' do
+  %ol
+  - @movie_list.each do |m|
     %li
-      %i
-        #{m['original_title']}
-      (#{m['release_date']})
+      = m.display_name
+      %button{type: 'submit', name: 'commit', value: "#{m.movie_name}"}
+        Choose

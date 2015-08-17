@@ -9,7 +9,7 @@ class MoviesControllerTest < ActionController::TestCase
     assert_routing({path: '/movie', method: :post}, {controller: 'movies', action: 'create'})
   end
   
-  describe 'posting' do
+  describe 'searching for movies' do
     before do
       devise_sign_in users(:user_1)
     end
@@ -18,11 +18,24 @@ class MoviesControllerTest < ActionController::TestCase
       post :create, {q: ' '}
       assert_template :new
 
-      post :create, {q: 'man'}
-      assert assigns(:movie_info)
+      assert_difference('Movie.count', 20) do
+        post :create, {q: 'man'}
+      end
+      assert assigns(:movie_list)
       assert assigns(:movie_list_partial)
+      
+      assert_no_difference('Movie.count') do
+        post :create, {q: 'man'}
+      end
+
+      assert_operator assigns(:movie_list).size, :>, 0
 
       assert_select 'li', 20
     end
-  end
+
+    it 'works when the movies are already in db' do
+      post :create, {q: 'Man'}
+      assert_select 'li', 2
+    end
+  end      
 end

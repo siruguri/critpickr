@@ -15,6 +15,8 @@
 //= require jquery-ui
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require react
+//= require react_ujs
+//= require components
 //= require underscore
-//= require gmaps/google
-//= require_tree .
+//= require buttonparty

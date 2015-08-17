@@ -1,6 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
+ 
 @import 'reset';
 @import 'custom';
-
+@import 'jquery_ui_helpers';
+@import "jquery-ui/core";
+@import "jquery-ui/theme";
+@import "jquery-ui/sortable";

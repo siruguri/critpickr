@@ -48,7 +48,7 @@ module Scrapers
         
         @payload[:data_root] = {title: title}
         build_payloads(@_dom, rules['data'], @payload[:data_root])
-        build_links(@_dom, rules['links'])
+        build_links(@_dom, rules['links']) if rules['links']
       end
       
       @payload
@@ -78,6 +78,7 @@ module Scrapers
     
     def build_payloads(safe_dom, rules, extracted_data)
       rules.each do |rule|
+        next unless rule.is_a? Hash
         begin
           elts = safe_dom.try_css(rule['pattern'])
         rescue DomFailure => e

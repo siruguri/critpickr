@@ -3,10 +3,15 @@ class MoviesController < ApplicationController
   
   def create
     if params[:q] and params[:q].strip.length > 0
-      t=TmdbApiWrapper::Client.new(api_key: ENV['TMDB_API_KEY'])
+      unless (@movie_list = Movie.search(params[:q]))
+        t=TmdbApiWrapper::Client.new(api_key: ENV['TMDB_API_KEY'])
+        @movie_list = Movie.add_from_tmdb!(t.search_movie query: params[:q].strip)
+      end
 
-      @movie_info = t.search_movie query: params[:q].strip
-      @movie_list_partial = true
+      # movie_list is nil if the add to DB method failed
+      if @movie_list
+        @movie_list_partial = true
+      end
     end
     render :new
   end

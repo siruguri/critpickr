@@ -6,7 +6,7 @@ module Scrapers
        links: [{pattern: 'a.articleLink',
                 value: :search_results_list,
                 page_extraction_class: 'RtMovieScraper',
-                db_adaptor: 'RtMovieEntry'}]}
+                db_adaptor: 'Movie'}]}
     end
   end    
 end

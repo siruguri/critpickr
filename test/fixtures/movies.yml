@@ -1,0 +1,6 @@
+entry_1:
+  original_uri: someuri
+  movie_name: Man from Nowhere
+entry_2:
+  original_uri: someuri_else
+  movie_name: The Man from Somewhere

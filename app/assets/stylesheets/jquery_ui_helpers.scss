@@ -1,0 +1,16 @@
+#movie_sortable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+}
+
+#movie_sortable li {
+  margin: 0 3px 3px 3px;
+  padding: 0.4em;
+  padding-left: 1.5em;
+  &:hover {
+    cursor: move
+  }
+}
+      

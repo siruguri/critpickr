@@ -1,0 +1,10 @@
+.paragraph
+  Hi, #{current_user.email}!
+
+.paragraph
+  Here are your movies in current sort order.
+
+.paragraph#content{'data-movie-payload' => @movie_data}
+
+= javascript_include_tag "buttonparty"
+= javascript_include_tag "actions"

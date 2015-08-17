@@ -23,6 +23,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass'
+gem 'react-rails'
 
 # Needed for default layouts
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -30,6 +31,8 @@ gem 'turbolinks'
 gem 'underscore-rails'
 
 # Adding Doorkeeper
+gem 'grape'
+gem 'wine_bouncer'
 gem 'doorkeeper'
 
 group :doc do

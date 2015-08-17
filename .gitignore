@@ -34,3 +34,5 @@ config/secrets.yml
 bower.json
 .DS_Store
 dump.rdb
+.keep
+local_files/
