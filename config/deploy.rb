@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-app_name = 'crit_pickr'
+app_name = 'critpickr'
 set :application, app_name
 set :full_app_name, app_name
 set :repo_url, "git@github.com:siruguri/#{app_name}.git"
@@ -32,7 +32,7 @@ set :sidekiq_options_per_process, ["--queue scrapers"]
 set :sidekiq_monit_default_hooks, false
 
 # Default value for :linked_files is [] - you probably want a Postgres database in production, not SQLite3
-set :linked_files, fetch(:linked_files, []).push('.env', 'config/database.yml', 'config/secrets.yml', #'db/development.sqlite3', 'db/production.sqlite3')
+set :linked_files, fetch(:linked_files, []).push('.env', 'config/database.yml', 'config/secrets.yml')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
@@ -44,7 +44,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :keep_releases, 3
 
 namespace :deploy do
-
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -53,5 +52,4 @@ namespace :deploy do
       # end
     end
   end
-
 end

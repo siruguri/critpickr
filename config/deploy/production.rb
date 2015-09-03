@@ -1,22 +1,13 @@
-# Simple Role Syntax
-# ==================
-# Supports bulk-adding hosts to roles, the primary server in each group
-# is considered to be the first unless any hosts have the primary
-# property set.  Don't declare `role :all`, it's a meta role.
+require 'dotenv'
+Dotenv.load
 
-role :app, %w{deploy@example.com}
-role :web, %w{deploy@example.com}
-role :db,  %w{deploy@example.com}
+remote_server = ENV['RAILS_REMOTE_SERVER']
+remote_port = ENV['RAILS_REMOTE_PORT']
 
+server remote_server, user: "www-data", port: remote_port, roles: %w(web app db)
 
-# Extended Server Syntax
-# ======================
-# This can be used to drop a more detailed server definition into the
-# server list. The second argument is a, or duck-types, Hash and is
-# used to set extended properties on the server.
-
-server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
-
+set :branch, 'master'
+set :rails_env, :production
 
 # Custom SSH Options
 # ==================
@@ -25,21 +16,10 @@ server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
 #
 # Global options
 # --------------
-#  set :ssh_options, {
-#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
-#  }
-#
-# And/or per server (overrides global)
-# ------------------------------------
-# server 'example.com',
-#   user: 'user_name',
-#   roles: %w{web app},
-#   ssh_options: {
-#     user: 'user_name', # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
-#     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: 'please use keys'
-#   }
+set :ssh_options, {
+      keys: %w(/users/sameer/.ssh/digital_ocean_sameer),
+      port: remote_port,
+    }
+
+set :deploy_to, "/var/www/railsapps/#{fetch(:full_app_name)}"
+
