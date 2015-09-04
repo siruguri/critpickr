@@ -1,3 +1,7 @@
+no_db_model_reg:
+  scraper_registration_name: no_db_model
+  scraper_json: <%= {data: {ratings: [1,2,3]} }.to_json %>
+
 bad_db_model_name_reg:
   db_model: NotExistingDbModel
   scraper_json: <%= {data: {ratings: [1,2,3]} }.to_json %>
@@ -8,7 +12,7 @@ reg_1:
   db_model: Movie
   scraper_json: <%= {data: {ratings: [1,2,3]} }.to_json %>
 rt_me_reg:
-  db_model: Movie
+  db_model: ScraperAdaptor
   scraper_json: <%= {data: {ratings: [1,2,3]} }.to_json %>
 rt_person_reg:
   scraper_registration_name: RtPersonPage

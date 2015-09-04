@@ -39,21 +39,23 @@ class Movie < ActiveRecord::Base
   end
 
   def save_payload!(payload)
-    self.ratings = payload[:ratings]
-    self.movie_name = payload[:movie_name][0]
-    self.save!
+    self.ratings = [payload['allcrits_tomato_score'], payload['topcrits_tomato_score'], payload['audience_tomato_score']].flatten
+    self.movie_name = payload['movie_name'] ? payload['movie_name'][0] : 'Payload had no movie_name attribute'
     
-    payload[:critic_data].each do |crit_hash|
-      if crit_hash[:name]
-        matches = /(original score: ([\d.]+)\/(\d+))?.* (fresh|rotten)/i.match(crit_hash[:rating][0])
-        if matches[3]
+    payload['critic_data'].each do |crit_hash|
+      if crit_hash['name'] and crit_hash['rating']
+        matches = /(original score: ([\d.]+)\/(\d+))?.* (fresh|rotten)/i.match(crit_hash['rating'][0])
+        if matches and matches[3]
           # There's an orig score
           orig_score = matches[2].to_f
           orig_score_base = matches[3].to_i
+          tomato_img = matches[matches.size - 1]
+        else
+          orig_score = orig_score_base = -1.0
+          tomato_img = 'no_rating.png'
         end
-        tomato_img = matches[matches.size - 1]
-
-        crit = MovieCritic.find_or_create_by name: crit_hash[:name][0]
+        
+        crit = MovieCritic.find_or_create_by name: crit_hash['name'][0]
         rating = MovieCriticRating.new(original_score: orig_score, original_score_base: orig_score_base,
                                        tomato: tomato_img, movie: self, movie_critic: crit)
         if rating.valid? # Don't duplicate ratings
@@ -61,5 +63,7 @@ class Movie < ActiveRecord::Base
         end
       end
     end
+
+    self.save!    
   end
 end

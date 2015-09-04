@@ -107,10 +107,11 @@ module Scrapers
               extraction_actors.each do |actor|
                 if elt.respond_to? actor['function']
                   if actor['args'].empty?
-                    bits << elt.send(actor['function'])
+                    bit = elt.send(actor['function'])
                   else
-                    bits << elt.send(actor['function'], *actor['args'])
+                    bit = elt.send(actor['function'], *actor['args'])                    
                   end
+                  bits << bit.strip if bit
                 end
               end
               extracted_data[rule['value']] << bits.join(' ')
